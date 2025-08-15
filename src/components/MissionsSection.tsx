@@ -6,12 +6,34 @@ import { Calendar, Gamepad2, Award, CheckCircle, Lock } from "lucide-react";
 
 const MissionsSection = () => {
   const missions = [
-    { day: 1, title: "What is AI?", description: "Meet your first AI friend", completed: true, difficulty: "Beginner" },
-    { day: 2, title: "AI in Everyday Life", description: "Spot AI all around you", completed: true, difficulty: "Beginner" },
-    { day: 3, title: "Machine Learning Basics", description: "Teach a computer to learn", completed: true, difficulty: "Beginner" },
-    { day: 4, title: "Data Detective", description: "Solve puzzles with data", completed: false, difficulty: "Beginner" },
-    { day: 5, title: "Image Recognition", description: "Help AI see like humans", completed: false, difficulty: "Intermediate" },
-    { day: 6, title: "Voice Assistants", description: "Chat with AI friends", completed: false, difficulty: "Intermediate" },
+    { day: 1, title: "What is Artificial Intelligence?", description: "Understanding AI fundamentals and how machines think", completed: true, difficulty: "Beginner" },
+    { day: 2, title: "AI vs Human Intelligence", description: "Comparing how AI and humans solve problems", completed: true, difficulty: "Beginner" },
+    { day: 3, title: "Machine Learning Introduction", description: "How computers learn from data without explicit programming", completed: true, difficulty: "Beginner" },
+    { day: 4, title: "Types of Machine Learning", description: "Supervised, unsupervised, and reinforcement learning", completed: false, difficulty: "Beginner" },
+    { day: 5, title: "Data in Machine Learning", description: "Understanding datasets, features, and training data", completed: false, difficulty: "Beginner" },
+    { day: 6, title: "Algorithms and Models", description: "How AI algorithms create predictive models", completed: false, difficulty: "Beginner" },
+    { day: 7, title: "Linear Regression Basics", description: "Predicting values with straight line patterns", completed: false, difficulty: "Intermediate" },
+    { day: 8, title: "Classification Problems", description: "Teaching AI to categorize and sort data", completed: false, difficulty: "Intermediate" },
+    { day: 9, title: "Decision Trees", description: "How AI makes decisions like a flowchart", completed: false, difficulty: "Intermediate" },
+    { day: 10, title: "Neural Networks Introduction", description: "Brain-inspired networks that power AI", completed: false, difficulty: "Intermediate" },
+    { day: 11, title: "Deep Learning Basics", description: "Multi-layered neural networks for complex tasks", completed: false, difficulty: "Intermediate" },
+    { day: 12, title: "Image Recognition", description: "How AI learns to see and understand pictures", completed: false, difficulty: "Intermediate" },
+    { day: 13, title: "Natural Language Processing", description: "Teaching AI to understand human language", completed: false, difficulty: "Advanced" },
+    { day: 14, title: "Computer Vision", description: "AI systems that can interpret visual information", completed: false, difficulty: "Advanced" },
+    { day: 15, title: "Voice Recognition", description: "How AI understands and processes speech", completed: false, difficulty: "Advanced" },
+    { day: 16, title: "Recommendation Systems", description: "How Netflix and Spotify suggest content", completed: false, difficulty: "Advanced" },
+    { day: 17, title: "Chatbots and Virtual Assistants", description: "Building AI that can have conversations", completed: false, difficulty: "Advanced" },
+    { day: 18, title: "AI in Gaming", description: "How AI creates intelligent game opponents", completed: false, difficulty: "Advanced" },
+    { day: 19, title: "Convolutional Neural Networks", description: "Specialized networks for image processing", completed: false, difficulty: "Advanced" },
+    { day: 20, title: "Recurrent Neural Networks", description: "AI with memory for sequence data", completed: false, difficulty: "Advanced" },
+    { day: 21, title: "Transformer Models", description: "The technology behind ChatGPT and modern AI", completed: false, difficulty: "Expert" },
+    { day: 22, title: "Generative AI", description: "AI that creates new content and images", completed: false, difficulty: "Expert" },
+    { day: 23, title: "AI Ethics and Bias", description: "Responsible AI development and fairness", completed: false, difficulty: "Expert" },
+    { day: 24, title: "AI in Healthcare", description: "How AI helps doctors diagnose diseases", completed: false, difficulty: "Expert" },
+    { day: 25, title: "Autonomous Vehicles", description: "Self-driving cars and AI navigation", completed: false, difficulty: "Expert" },
+    { day: 26, title: "AI in Finance", description: "Fraud detection and algorithmic trading", completed: false, difficulty: "Expert" },
+    { day: 27, title: "Future of AI", description: "Emerging trends and career opportunities", completed: false, difficulty: "Expert" },
+    { day: 28, title: "Build Your First AI Project", description: "Create a simple AI model from scratch", completed: false, difficulty: "Expert" },
   ];
 
   return (
@@ -116,7 +138,11 @@ const MissionsSection = () => {
                       </div>
                     </div>
                     <div className="flex flex-col items-end space-y-2">
-                      <Badge variant={mission.difficulty === 'Beginner' ? 'secondary' : 'default'}>
+                      <Badge variant={
+                        mission.difficulty === 'Beginner' ? 'secondary' : 
+                        mission.difficulty === 'Intermediate' ? 'default' :
+                        mission.difficulty === 'Advanced' ? 'destructive' : 'outline'
+                      }>
                         {mission.difficulty}
                       </Badge>
                       {mission.day === 4 && (
