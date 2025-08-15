@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Brain, Calendar, Target, Users, BookOpen, Home } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const scrollToSection = (sectionId: string) => {
@@ -31,13 +32,13 @@ const Navigation = () => {
               <Home className="h-4 w-4" />
               <span>Home</span>
             </button>
-            <button 
-              onClick={() => scrollToSection('quiz')} 
-              className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors cursor-pointer"
+            <Link 
+              to="/quiz" 
+              className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors"
             >
               <Target className="h-4 w-4" />
-              <span>Start Quiz</span>
-            </button>
+              <span>Take Quiz</span>
+            </Link>
             <button 
               onClick={() => scrollToSection('missions')} 
               className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors cursor-pointer"
@@ -64,9 +65,9 @@ const Navigation = () => {
           <Button 
             variant="hero" 
             size="sm"
-            onClick={() => scrollToSection('quiz')}
+            asChild
           >
-            Get Started
+            <Link to="/quiz">Get Started</Link>
           </Button>
         </div>
       </div>
