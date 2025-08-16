@@ -1,8 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Brain, Calendar, Target, Users, BookOpen, Home } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { UserMenu } from "./UserMenu";
 
 const Navigation = () => {
+  const { user } = useAuth();
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -69,13 +73,18 @@ const Navigation = () => {
             </button>
           </div>
           
-          <Button 
-            variant="hero" 
-            size="sm"
-            asChild
-          >
-            <Link to="/quiz">Get Started</Link>
-          </Button>
+          {user ? (
+            <UserMenu />
+          ) : (
+            <div className="flex items-center space-x-2">
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/signin">Sign In</Link>
+              </Button>
+              <Button variant="hero" size="sm" asChild>
+                <Link to="/signup">Get Started</Link>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </nav>
