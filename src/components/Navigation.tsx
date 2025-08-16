@@ -39,6 +39,13 @@ const Navigation = () => {
               <Target className="h-4 w-4" />
               <span>Take Quiz</span>
             </Link>
+            <Link 
+              to="/lessons" 
+              className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors"
+            >
+              <BookOpen className="h-4 w-4" />
+              <span>Lessons</span>
+            </Link>
             <button 
               onClick={() => scrollToSection('missions')} 
               className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors cursor-pointer"
