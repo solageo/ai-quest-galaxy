@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Gamepad2, Award, CheckCircle, Lock } from "lucide-react";
+import { Calendar, Gamepad2, Award, CheckCircle, Lock, Target } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const MissionsSection = () => {
   const missions = [
@@ -116,45 +117,77 @@ const MissionsSection = () => {
           </div>
           
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold mb-6">Upcoming Missions</h3>
-            {missions.map((mission) => (
-              <Card key={mission.day} className={`shadow-card border-0 transition-all duration-300 hover:scale-102 ${
-                mission.completed ? 'bg-ai-green/5 border-ai-green/20' : 
-                mission.day === 4 ? 'ring-2 ring-ai-blue shadow-button' : 'opacity-60'
-              }`}>
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold ${
-                        mission.completed ? 'bg-ai-green text-white' :
-                        mission.day === 4 ? 'bg-ai-blue text-white' : 'bg-muted text-muted-foreground'
-                      }`}>
-                        {mission.completed ? <CheckCircle className="h-6 w-6" /> :
-                         mission.day === 4 ? mission.day : <Lock className="h-6 w-6" />}
+            <h3 className="text-2xl font-bold mb-6">Start Your AI Journey</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {missions.slice(0, 6).map((mission, index) => {
+                const isNext = index === 0; // First mission is always the next one to start
+                const isLocked = index > 0; // All missions after the first are locked initially
+                
+                return (
+                  <Card 
+                    key={mission.day} 
+                    className={`transition-all hover:shadow-lg ${
+                      isNext 
+                        ? 'ring-2 ring-primary border-primary bg-primary/5' 
+                        : isLocked 
+                        ? 'opacity-60 cursor-not-allowed' 
+                        : ''
+                    }`}
+                  >
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between">
+                        <Badge variant="outline" className="text-xs">
+                          Day {mission.day}
+                        </Badge>
+                        <Badge 
+                          className={
+                            mission.difficulty === 'Beginner' ? 'bg-green-500' :
+                            mission.difficulty === 'Intermediate' ? 'bg-yellow-500' :
+                            'bg-red-500'
+                          }
+                        >
+                          {mission.difficulty}
+                        </Badge>
                       </div>
-                      <div>
-                        <h4 className="font-semibold">Day {mission.day}: {mission.title}</h4>
-                        <p className="text-sm text-muted-foreground">{mission.description}</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-end space-y-2">
-                      <Badge variant={
-                        mission.difficulty === 'Beginner' ? 'secondary' : 
-                        mission.difficulty === 'Intermediate' ? 'default' :
-                        mission.difficulty === 'Advanced' ? 'destructive' : 'outline'
-                      }>
-                        {mission.difficulty}
-                      </Badge>
-                      {mission.day === 4 && (
-                        <Button variant="mission" size="sm">
-                          Start Now
-                        </Button>
+                      <CardTitle className="text-lg leading-tight">
+                        {mission.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+                        {mission.description}
+                      </p>
+                      
+                      {isNext && (
+                        <div className="mb-4 p-3 bg-primary/10 rounded-lg border border-primary/20">
+                          <div className="flex items-center gap-2 text-primary font-medium text-sm">
+                            <Target className="h-4 w-4" />
+                            Start your AI journey here!
+                          </div>
+                        </div>
                       )}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                      
+                      <Button 
+                        className="w-full" 
+                        disabled={isLocked}
+                        onClick={() => window.location.href = `/lesson/${mission.day}`}
+                        variant={isNext ? "default" : isLocked ? "outline" : "outline"}
+                      >
+                        {isNext ? 'Start Now' : isLocked ? 'Complete Previous Lessons' : 'Start Lesson'}
+                      </Button>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+            
+            <div className="mt-8 text-center">
+              <Link to="/lessons">
+                <Button variant="outline" size="lg">
+                  View All 28 Lessons
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
